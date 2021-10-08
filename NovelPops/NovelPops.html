@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<title>NovelPops</title>
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <!--Css Proprio-->
+    <link rel="stylesheet" href="../Style/estilo.css">
+    <link rel="stylesheet" href="../icons/css/all.min.css" />
+
+</head>
+
+<body>
+
+    <div class="app-wrapper">
+        <div class="player">
+
+          <!-- transições e ações internas do player-->
+            <audio id="music-player"></audio>
+            <div id="song-image" class="song-img" style="background-image: url('imagens/figInicio.jpg');"></div>
+            <div class="song-details">
+                <p id="song-title">1</p>
+            </div>
+            <div class="player-controls">
+                <button id="prev-btn" class="skip-btn"><i class="fas fa-backward fa-lg"></i></button>
+                <button id="play-btn" class="play"><i id="play-icon" class="fas fa-play fa-2x" ></i></button>
+                <button id="next-btn" class="skip-btn"><i class="fas fa-forward fa-lg"></i></button>
+            </div>
+            <div class="next-up">
+                <input type="text" class="form-control campoPalpite" id="palpite" placeholder="               Digite aqui">
+                <br>
+                <center><button class="btn btn-outline-danger" type="submit" onclick="return Verifica(palpite)">Ok</button> </center>       
+            </div>
+        </div>
+    </div>
+
+
+
+   <!-- <div class="row">
+
+        Card 1
+        <div class="col">
+          <div class="card border-danger border-5 tamCard" >
+            <div class="card-body cardAdivinhe" id="cor">
+                <div id = "remover0">
+                    <div class="card-header" >
+                       <h3 class="card-title">Tentativa: </h3>
+                       <h2 class="card-title"id="titulo">0</h2>
+                      </div>                
+                    <audio id="player" autoplay="autoplay" controls="controls">
+                        <source src="musicas/msc1.mp3" type="audio/mp3" />
+                    </audio>
+                    <form>
+                        <div class = "row">
+                            <div class="col">
+                                <input type="text" class="form-control campoPalpite" id="palpite" placeholder="Digite aqui"> 
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-outline-danger" type="submit" onclick="return Verifica(0,titulo,palpite,cor,remover0,pontuacao)">Ok</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+        
+    </div>
+  
+    
+    
+    
+    <h1>Pontuação:</h1>    
+     <p id="pontuacao">0</p>-->
+
+
+
+    <!--Js proprio-->
+    <script src=JS/main.js></script>
+   
+
+</body>
+</html>
