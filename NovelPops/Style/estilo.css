@@ -6,13 +6,7 @@ body{
     
 }
 
-#song-title {
-    color: rgb(19, 18, 18)
-}
 
-
-
-/*verificar*/
 * {
     margin: 0;
     padding: 0;
@@ -45,7 +39,7 @@ body{
     display: block;
     margin: 0 auto;
     width: 300px;
-    background-color: #FE4880;
+    background-color: #fe7248;
     border-radius: 2%;
     box-shadow: 0px 2px 20px rgba(243, 243, 235, 0.6);
     margin-bottom: 50px;
@@ -62,8 +56,7 @@ body{
 
 .song-details h2 {
     font-size: 24px;
-    font-weight: 600;
-    color: #ffffff;
+    color: #b6a7a7;
     margin-bottom: 5px;
     padding-bottom: 1em;
     text-align: center;
