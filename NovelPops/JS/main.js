@@ -64,48 +64,37 @@ var novelas = [{tit: "da cor do pecado", img: "https://s2.glbimg.com/Ks1Irvid6I_
                 {tit: "explode coracao", img: "https://artworks.thetvdb.com/banners/posters/5b43634d827bf_t.jpg", count:0, pont: 10}]
 var pontos = 0;
 
-window.onload = () => {
-
-    /* ações para os botões */
+    /* botões do player*/
     const play_btn = document.getElementById('play-btn');
     const play_btn_icon = document.getElementById('play-icon');
     const prev_btn = document.getElementById('prev-btn');
     const next_btn = document.getElementById('next-btn');
 
-/* ações para o player */
-const audio_player = document.getElementById('music-player');
+    /* player */
+    const audio_player = document.getElementById('music-player');
 
 
-play_btn.addEventListener('click', TogglePlaySong);
-next_btn.addEventListener('click', () => ChangeSong());
-prev_btn.addEventListener('click', () => ChangeSong(false));
 
-InitPlayer();
+window.onload = () => {
+
+    play_btn.addEventListener('click', TogglePlaySong);
+
+    InitPlayer();
 
 function InitPlayer() {
-
-    var titulo = document.getElementById("song-num").firstChild.nodeValue;
-    UpdatePlayer(titulo);
-    
+    audio_player.src = "musicas/msc1.mp3";
 }
 
-/* ação para atualizar o player */
-function UpdatePlayer(i) {
-    
-    var aux = ("musicas/msc") + (i) + (".mp3");
-    audio_player.src = aux;
-    var imagem = document.getElementById("song-image");
-    var novela = document.getElementById("name-novel");
-    imagem.style.backgroundImage= "url('imagens/figInicio.jpg";
-    novela.innerHTML = ("Novela ") + i;
-
-}
 
 function TogglePlaySong() {
     if (audio_player.paused) {
         audio_player.play();
         play_btn_icon.classList.remove('fa-play');
         play_btn_icon.classList.add('fa-pause');
+        setTimeout(function(){
+            play_btn_icon.classList.add('fa-play');
+            play_btn_icon.classList.remove('fa-pause');
+        }, 12000);
     } else {
         audio_player.pause();
         play_btn_icon.classList.add('fa-play');
@@ -114,17 +103,20 @@ function TogglePlaySong() {
     }
 }
 
+
 }
 
 function atualiza(i) {
-    const audio_player = document.getElementById('music-player');
     var aux = ("musicas/msc") + (i) + (".mp3");
     audio_player.src = aux;
+    play_btn_icon.classList.add('fa-play');
+    play_btn_icon.classList.remove('fa-pause');
     if (i>1){
         var imagem = document.getElementById("song-image");
         var novela = document.getElementById("name-novel");
         imagem.style.backgroundImage= "url('imagens/figInicio.jpg";
         novela.innerHTML = ("Novela ") + i;
+        document.getElementById('palpite').value='';  // Limpa o campo
     }
   }
   
@@ -132,23 +124,26 @@ function atualiza(i) {
 
 function Verifica(palpite){
 
-    var titulo = document.getElementById("song-num").firstChild.nodeValue;
+    var teste = document.getElementById("name-novel").firstChild.nodeValue;
     var imagem = document.getElementById("song-image");
 
-    indice = titulo - 1;
+    var b = teste.split(" ");
+    indice = b[1] - 1;
+    
+  
 
     if(novelas[indice].tit == palpite.value){
         var aux = ("url(") + (novelas[indice].img) + (")");
         imagem.style.backgroundImage = aux;
         imagem.style.backgroundSize = "cover"; 
         pontos = novelas[indice].pont + pontos;
-        var x = parseInt(titulo);
+        var x = parseInt(b[1]);
         var i = x + 1;
         //pontuacao.innerHTML= pontos;
+
         setTimeout(function() {
-            //alert(i);
             atualiza(i);
-          }, 2000);
+          }, 3000);
         
         return false;
     }
