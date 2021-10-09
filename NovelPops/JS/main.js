@@ -83,14 +83,22 @@ prev_btn.addEventListener('click', () => ChangeSong(false));
 InitPlayer();
 
 function InitPlayer() {
-    var titulo = document.getElementById("song-title").firstChild.nodeValue;
+
+    var titulo = document.getElementById("song-num").firstChild.nodeValue;
     UpdatePlayer(titulo);
+    
 }
 
 /* ação para atualizar o player */
 function UpdatePlayer(i) {
+    
     var aux = ("musicas/msc") + (i) + (".mp3");
     audio_player.src = aux;
+    var imagem = document.getElementById("song-image");
+    var novela = document.getElementById("name-novel");
+    imagem.style.backgroundImage= "url('imagens/figInicio.jpg";
+    novela.innerHTML = ("Novela ") + i;
+
 }
 
 function TogglePlaySong() {
@@ -108,10 +116,23 @@ function TogglePlaySong() {
 
 }
 
+function atualiza(i) {
+    const audio_player = document.getElementById('music-player');
+    var aux = ("musicas/msc") + (i) + (".mp3");
+    audio_player.src = aux;
+    if (i>1){
+        var imagem = document.getElementById("song-image");
+        var novela = document.getElementById("name-novel");
+        imagem.style.backgroundImage= "url('imagens/figInicio.jpg";
+        novela.innerHTML = ("Novela ") + i;
+    }
+  }
+  
+
 
 function Verifica(palpite){
 
-    var titulo = document.getElementById("song-title").firstChild.nodeValue;
+    var titulo = document.getElementById("song-num").firstChild.nodeValue;
     var imagem = document.getElementById("song-image");
 
     indice = titulo - 1;
@@ -120,12 +141,15 @@ function Verifica(palpite){
         var aux = ("url(") + (novelas[indice].img) + (")");
         imagem.style.backgroundImage = aux;
         imagem.style.backgroundSize = "cover"; 
-        
-        //imagem.style.backgroundRepeat = "no-repeat";
-        //imagem.setAttribute('src', novelas[indice].img); //troca imagem
-        //remov.parentNode.removeChild(remov); //remove itens
         pontos = novelas[indice].pont + pontos;
+        var x = parseInt(titulo);
+        var i = x + 1;
         //pontuacao.innerHTML= pontos;
+        setTimeout(function() {
+            //alert(i);
+            atualiza(i);
+          }, 2000);
+        
         return false;
     }
 
@@ -140,35 +164,4 @@ function Verifica(palpite){
     }
 }
 
-/*
-function Verifica(indice,titulo,palpite,cor,remov,pontuacao)
-{   
-    
-    if(novelas[indice].tit == palpite.value){
-        var aux = ("url(") + (novelas[indice].img) + (")");
-        cor.style.backgroundImage = aux;
-        cor.style.backgroundSize = "300px 380px"; 
-        cor.style.backgroundRepeat = "no-repeat";
-        //imagem.setAttribute('src', novelas[indice].img);
-        remov.parentNode.removeChild(remov);
-        pontos = novelas[indice].pont + pontos;
-        pontuacao.innerHTML= pontos;
-        return false;
-    }
-
-    else{
-
-        if(novelas[indice].count < 10) {
-            novelas[indice].pont = novelas[indice].pont - 1;
-        }
-
-        //Atualiza o Card
-        novelas[indice].count+=1;
-        cor.style.color = "white";
-        cor.style.background = "red";
-        titulo.innerHTML= novelas[indice].count;
-
-        return false;
-    }
-*/
 
