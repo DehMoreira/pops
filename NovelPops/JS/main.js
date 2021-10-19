@@ -61,8 +61,11 @@ let novelas = [{tit: "da cor do pecado", stat: false},
                 {tit: "deus salve o rei", stat:false},
                 {tit: "saramandaia", stat:false},
                 {tit: "mulheres de areia", stat:false},
-                {tit: "explode coracao", stat:false}]
+                {tit: "explode coracao", stat:false},
+                {}];
+
 var pontos = 0;
+
 
     /* botões do player*/
     const play_btn = document.getElementById('play-btn');
@@ -90,7 +93,7 @@ window.onload = () => {
     InitPlayer();
 
     function InitPlayer() {
-    current_song_index = 0;
+    current_song_index = 1;
     next_song_index = current_song_index + 1;
     audio_player.src = "musicas/msc1.mp3";
 }
@@ -116,40 +119,46 @@ function TogglePlaySong() {
 }
 
 function UpdatePlayer() { 
-    var aux = parseInt(current_song_index);
-    let novela = novelas[aux];
-        var music = ("musicas/msc") + (aux) + (".mp3");
-        audio_player.src = music;
-        play_btn_icon.classList.add('fa-play');
-        play_btn_icon.classList.remove('fa-pause');
-        var imagem = document.getElementById("song-image");
-        var titnovela = document.getElementById("name-novel");
-        imagem.style.backgroundImage= "url('../imagens/figInicio.jpg";
-        titnovela.innerHTML = ("Novela ") + aux;
-        document.getElementById('palpite').value='';  // Limpa o campo
+    var i = parseInt(current_song_index);
+   
+
+    console.log("indice: " + i + " novela: " + novelas[i-1].tit + " status: "+ novelas[i-1].stat);
+    
+     console.log(novelas[i].stat); 
+
+    if(novelas[i-1].stat == true){
+        console.log("entrou");
+        AtualizaCorreto(i);
+    }
+    else{
+        console.log("não entrou");
+        Atualiza(i);
+    }
 }
 
 function Change(next = true ) {
 
-
     if (next) {
         current_song_index++;
+
         next_song_index = current_song_index +1;
+        
 
         if (current_song_index > novelas.length - 1) {
-            current_song_index = 0;
-            next_song_index = current_song_index + 1;
+            current_song_index = 1;
+            next_song_index = 2;
         }
 
-        if (next_song_index > novelas.length - 1) {
-            next_song_index = 0;
+        if (next_song_index > novelas.length) {
+            next_song_index = 1;
         }
     } 
+
+
 
     UpdatePlayer();
 
 }
-
 
 
 function Atualiza(i) {
@@ -173,7 +182,8 @@ function AtualizaCorreto(i) {
     imagem.style.backgroundRepeat = "no-repeat"; 
     imagem.style.backgroundPosition = "right";
     document.getElementById("name-novel").innerHTML = novelas[i].tit.toUpperCase();
-    novelas[i].stat = true; 
+
+    
 }
 
 
@@ -183,7 +193,7 @@ function Verifica(verifica){
     var numero = document.getElementById("name-novel").firstChild.nodeValue;
     var b = numero.split(" ");
     indice = b[1] - 1;
-    
+    var imagem = document.getElementById("song-image");
   
 
     if(novelas[indice].tit == palpite){
@@ -191,10 +201,13 @@ function Verifica(verifica){
         pontos = 1 + pontos;
         var x = parseInt(b[1]);
         var i = x + 1;
-        AtualizaCorreto(indice)
+       
+        AtualizaCorreto(indice);
         current_song_index++;
+        novelas[indice].stat=true;            
 
         setTimeout(function() {
+           
             Atualiza(i);
           }, 3500);
         
