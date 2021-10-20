@@ -86,7 +86,6 @@ var pontos = 0;
 
 
 window.onload = () => {
-
      
     play_btn.addEventListener('click', TogglePlaySong);
 
@@ -120,18 +119,14 @@ function TogglePlaySong() {
 
 function UpdatePlayer() { 
     var i = parseInt(current_song_index);
-   
 
-    console.log("indice: " + i + " novela: " + novelas[i-1].tit + " status: "+ novelas[i-1].stat);
-    
-     console.log(novelas[i].stat); 
 
     if(novelas[i-1].stat == true){
-        console.log("entrou");
+
         AtualizaCorreto(i);
     }
     else{
-        console.log("não entrou");
+
         Atualiza(i);
     }
 }
@@ -140,7 +135,6 @@ function Change(next = true ) {
 
     if (next) {
         current_song_index++;
-
         next_song_index = current_song_index +1;
         
 
@@ -154,8 +148,6 @@ function Change(next = true ) {
         }
     } 
 
-
-
     UpdatePlayer();
 
 }
@@ -166,7 +158,6 @@ function Atualiza(i) {
     audio_player.src = aux;
     play_btn_icon.classList.add('fa-play');
     play_btn_icon.classList.remove('fa-pause');
-    
     var imagem = document.getElementById("song-image");
     var novela = document.getElementById("name-novel");
     imagem.style.backgroundImage= "url('../imagens/figInicio.jpg";
@@ -204,7 +195,18 @@ function Verifica(verifica){
        
         AtualizaCorreto(indice);
         current_song_index++;
-        novelas[indice].stat=true;            
+        novelas[indice].stat=true;
+
+        if(pontos <10){
+            document.getElementById("pontos").innerHTML = "0" + pontos + "/64";  
+        }
+        else{
+                document.getElementById("pontos").innerHTML = pontos + "/64";      
+        }
+        
+        if (pontos == novelas.length){
+            alert("Parabéns!!! Você acertou todos");
+        }
 
         setTimeout(function() {
            
