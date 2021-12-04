@@ -1,0 +1,14 @@
+
+body{
+	background-image:linear-gradient(to right, rgb(236, 222, 183), rgb(240, 186, 10));
+}
+
+.song{
+		background-color: rgb(196, 162, 50);
+}
+
+.answer{
+	background-color: rgba(240, 233, 174, 0.904);
+}
+
+

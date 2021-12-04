@@ -1,0 +1,12 @@
+.texto{
+    text-align: justify;
+}
+
+.paragrafo{
+    border-right: 2px dotted rgba(167, 160, 160, 0.5);
+    padding-right: 10px;
+}
+
+.principal{
+    margin: 2%;
+}
