@@ -30,6 +30,8 @@ let novelas = [{tit: "da cor do pecado", stat: false},
                 {tit: "o setimo guardiao", stat:false},
                 {tit: "verdades secretas", stat:false},
                 {tit: "o rei do gado", stat:false},
+                {}];
+                /*
                 {tit: "a favorita", stat:false},
                 {tit: "caminhos do coracao", stat:false},
                 {tit: "chocolate com pimenta", stat:false},
@@ -61,8 +63,8 @@ let novelas = [{tit: "da cor do pecado", stat: false},
                 {tit: "deus salve o rei", stat:false},
                 {tit: "saramandaia", stat:false},
                 {tit: "mulheres de areia", stat:false},
-                {tit: "explode coracao", stat:false},
-                {}];
+                {tit: "explode coracao", stat:false},*/
+                
 
 var pontos = 0;
 
@@ -173,8 +175,6 @@ function AtualizaCorreto(i) {
     imagem.style.backgroundRepeat = "no-repeat"; 
     imagem.style.backgroundPosition = "right";
     document.getElementById("name-novel").innerHTML = novelas[i].tit.toUpperCase();
-
-    
 }
 
 

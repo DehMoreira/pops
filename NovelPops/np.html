@@ -1,0 +1,514 @@
+<!DOCTYPE HTML>
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<title>NovelPops</title>
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <!--Css Proprio-->
+    <link rel="stylesheet" href="Style/estilo.css">
+    <link rel="stylesheet" href="../icons/css/all.min.css" />
+
+</head>
+
+<body>
+    <br>
+    <center><span class="badge rounded-pill bg-danger" id = "pontos">00/42</span></center>
+    <br>
+
+  
+    <div class="row">
+
+        <div class="col-sm-2">
+        <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+          <div class="card-body">
+            <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+          </div>
+          <div class="card-footer">
+            <input type="text" class="form-control campoPalpite" id="palpite" > 
+            <button class="btn btn-outline-secondary" type="submit" onclick="return Verifica(palpite)">Ok</button>
+          </div>
+        </div>
+        </div>
+
+        <div class="col-sm-2">
+        <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+          <div class="card-body">
+            <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+          </div>
+          <div class="card-footer">
+            <input type="text" class="form-control campoPalpite" id="palpite" >
+          </div>
+        </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+              <div class="card-body">
+                <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+              </div>
+              <div class="card-footer">
+                <input type="text" class="form-control campoPalpite" id="palpite" >
+              </div>
+            </div>
+            </div>
+        
+        <div class="col-sm-2">
+                <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                  <div class="card-body">
+                    <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                  </div>
+                  <div class="card-footer">
+                    <input type="text" class="form-control campoPalpite" id="palpite" >
+                  </div>
+                </div>
+                </div>
+
+
+                
+        <div class="col-sm-2">
+            <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+              <div class="card-body">
+                <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+              </div>
+              <div class="card-footer">
+                <input type="text" class="form-control campoPalpite" id="palpite" >
+              </div>
+            </div>
+            </div>
+        
+        <div class="col-sm-2">
+                <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                  <div class="card-body">
+                    <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                  </div>
+                  <div class="card-footer">
+                    <input type="text" class="form-control campoPalpite" id="palpite" >
+                  </div>
+                </div>
+                </div>
+        
+                
+        <div class="col-sm-2">
+            <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+              <div class="card-body">
+                <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+              </div>
+              <div class="card-footer">
+                <input type="text" class="form-control campoPalpite" id="palpite" >
+              </div>
+            </div>
+            </div>
+    
+            <div class="col-sm-2">
+            <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+              <div class="card-body">
+                <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+              </div>
+              <div class="card-footer">
+                <input type="text" class="form-control campoPalpite" id="palpite" >
+              </div>
+            </div>
+            </div>
+    
+            <div class="col-sm-2">
+                <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                  <div class="card-body">
+                    <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                  </div>
+                  <div class="card-footer">
+                    <input type="text" class="form-control campoPalpite" id="palpite" >
+                  </div>
+                </div>
+                </div>
+            
+            <div class="col-sm-2">
+                    <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                      <div class="card-body">
+                        <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                      </div>
+                      <div class="card-footer">
+                        <input type="text" class="form-control campoPalpite" id="palpite" >
+                      </div>
+                    </div>
+                    </div>
+    
+    
+                    
+            <div class="col-sm-2">
+                <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                  <div class="card-body">
+                    <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                  </div>
+                  <div class="card-footer">
+                    <input type="text" class="form-control campoPalpite" id="palpite" >
+                  </div>
+                </div>
+                </div>
+            
+            <div class="col-sm-2">
+                    <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                      <div class="card-body">
+                        <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                      </div>
+                      <div class="card-footer">
+                        <input type="text" class="form-control campoPalpite" id="palpite" >
+                      </div>
+                    </div>
+                    </div>
+
+                    
+        <div class="col-sm-2">
+            <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+              <div class="card-body">
+                <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+              </div>
+              <div class="card-footer">
+                <input type="text" class="form-control campoPalpite" id="palpite" >
+              </div>
+            </div>
+            </div>
+    
+            <div class="col-sm-2">
+            <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+              <div class="card-body">
+                <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+              </div>
+              <div class="card-footer">
+                <input type="text" class="form-control campoPalpite" id="palpite" >
+              </div>
+            </div>
+            </div>
+    
+            <div class="col-sm-2">
+                <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                  <div class="card-body">
+                    <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                  </div>
+                  <div class="card-footer">
+                    <input type="text" class="form-control campoPalpite" id="palpite" >
+                  </div>
+                </div>
+                </div>
+            
+            <div class="col-sm-2">
+                    <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                      <div class="card-body">
+                        <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                      </div>
+                      <div class="card-footer">
+                        <input type="text" class="form-control campoPalpite" id="palpite" >
+                      </div>
+                    </div>
+                    </div>
+    
+    
+                    
+            <div class="col-sm-2">
+                <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                  <div class="card-body">
+                    <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                  </div>
+                  <div class="card-footer">
+                    <input type="text" class="form-control campoPalpite" id="palpite" >
+                  </div>
+                </div>
+                </div>
+            
+            <div class="col-sm-2">
+                    <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                      <div class="card-body">
+                        <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                      </div>
+                      <div class="card-footer">
+                        <input type="text" class="form-control campoPalpite" id="palpite" >
+                      </div>
+                    </div>
+                    </div>
+
+                    
+        <div class="col-sm-2">
+            <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+              <div class="card-body">
+                <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+              </div>
+              <div class="card-footer">
+                <input type="text" class="form-control campoPalpite" id="palpite" >
+              </div>
+            </div>
+            </div>
+    
+            <div class="col-sm-2">
+            <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+              <div class="card-body">
+                <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+              </div>
+              <div class="card-footer">
+                <input type="text" class="form-control campoPalpite" id="palpite" >
+              </div>
+            </div>
+            </div>
+    
+            <div class="col-sm-2">
+                <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                  <div class="card-body">
+                    <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                  </div>
+                  <div class="card-footer">
+                    <input type="text" class="form-control campoPalpite" id="palpite" >
+                  </div>
+                </div>
+                </div>
+            
+            <div class="col-sm-2">
+                    <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                      <div class="card-body">
+                        <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                      </div>
+                      <div class="card-footer">
+                        <input type="text" class="form-control campoPalpite" id="palpite" >
+                      </div>
+                    </div>
+                    </div>
+    
+    
+                    
+            <div class="col-sm-2">
+                <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                  <div class="card-body">
+                    <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                  </div>
+                  <div class="card-footer">
+                    <input type="text" class="form-control campoPalpite" id="palpite" >
+                  </div>
+                </div>
+                </div>
+            
+            <div class="col-sm-2">
+                    <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                      <div class="card-body">
+                        <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                      </div>
+                      <div class="card-footer">
+                        <input type="text" class="form-control campoPalpite" id="palpite" >
+                      </div>
+                    </div>
+                    </div>
+
+                    
+        <div class="col-sm-2">
+            <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+              <div class="card-body">
+                <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+              </div>
+              <div class="card-footer">
+                <input type="text" class="form-control campoPalpite" id="palpite" >
+              </div>
+            </div>
+            </div>
+    
+            <div class="col-sm-2">
+            <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+              <div class="card-body">
+                <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+              </div>
+              <div class="card-footer">
+                <input type="text" class="form-control campoPalpite" id="palpite" >
+              </div>
+            </div>
+            </div>
+    
+            <div class="col-sm-2">
+                <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                  <div class="card-body">
+                    <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                  </div>
+                  <div class="card-footer">
+                    <input type="text" class="form-control campoPalpite" id="palpite" >
+                  </div>
+                </div>
+                </div>
+            
+            <div class="col-sm-2">
+                    <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                      <div class="card-body">
+                        <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                      </div>
+                      <div class="card-footer">
+                        <input type="text" class="form-control campoPalpite" id="palpite" >
+                      </div>
+                    </div>
+                    </div>
+    
+    
+                    
+            <div class="col-sm-2">
+                <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                  <div class="card-body">
+                    <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                  </div>
+                  <div class="card-footer">
+                    <input type="text" class="form-control campoPalpite" id="palpite" >
+                  </div>
+                </div>
+                </div>
+            
+            <div class="col-sm-2">
+                    <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                      <div class="card-body">
+                        <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                      </div>
+                      <div class="card-footer">
+                        <input type="text" class="form-control campoPalpite" id="palpite" >
+                      </div>
+                    </div>
+                    </div>
+
+                    
+        <div class="col-sm-2">
+            <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+              <div class="card-body">
+                <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+              </div>
+              <div class="card-footer">
+                <input type="text" class="form-control campoPalpite" id="palpite" >
+              </div>
+            </div>
+            </div>
+    
+            <div class="col-sm-2">
+            <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+              <div class="card-body">
+                <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+              </div>
+              <div class="card-footer">
+                <input type="text" class="form-control campoPalpite" id="palpite" >
+              </div>
+            </div>
+            </div>
+    
+            <div class="col-sm-2">
+                <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                  <div class="card-body">
+                    <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                  </div>
+                  <div class="card-footer">
+                    <input type="text" class="form-control campoPalpite" id="palpite" >
+                  </div>
+                </div>
+                </div>
+            
+            <div class="col-sm-2">
+                    <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                      <div class="card-body">
+                        <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                      </div>
+                      <div class="card-footer">
+                        <input type="text" class="form-control campoPalpite" id="palpite" >
+                      </div>
+                    </div>
+                    </div>
+    
+    
+                    
+            <div class="col-sm-2">
+                <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                  <div class="card-body">
+                    <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                  </div>
+                  <div class="card-footer">
+                    <input type="text" class="form-control campoPalpite" id="palpite" >
+                  </div>
+                </div>
+                </div>
+            
+            <div class="col-sm-2">
+                    <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                      <div class="card-body">
+                        <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                      </div>
+                      <div class="card-footer">
+                        <input type="text" class="form-control campoPalpite" id="palpite" >
+                      </div>
+                    </div>
+                    </div>
+
+                    
+        <div class="col-sm-2">
+            <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+              <div class="card-body">
+                <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+              </div>
+              <div class="card-footer">
+                <input type="text" class="form-control campoPalpite" id="palpite" >
+              </div>
+            </div>
+            </div>
+    
+            <div class="col-sm-2">
+            <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+              <div class="card-body">
+                <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+              </div>
+              <div class="card-footer">
+                <input type="text" class="form-control campoPalpite" id="palpite" >
+              </div>
+            </div>
+            </div>
+    
+            <div class="col-sm-2">
+                <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                  <div class="card-body">
+                    <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                  </div>
+                  <div class="card-footer">
+                    <input type="text" class="form-control campoPalpite" id="palpite" >
+                  </div>
+                </div>
+                </div>
+            
+            <div class="col-sm-2">
+                    <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                      <div class="card-body">
+                        <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                      </div>
+                      <div class="card-footer">
+                        <input type="text" class="form-control campoPalpite" id="palpite" >
+                      </div>
+                    </div>
+                    </div>
+    
+    
+                    
+            <div class="col-sm-2">
+                <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                  <div class="card-body">
+                    <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                  </div>
+                  <div class="card-footer">
+                    <input type="text" class="form-control campoPalpite" id="palpite" >
+                  </div>
+                </div>
+                </div>
+            
+            <div class="col-sm-2">
+                    <div class="card text-white bg-danger mb-3" style="max-width: 10rem;">
+                      <div class="card-body">
+                        <center><button id="play-btn" class="play1"><i id="play-icon" class="fas fa-play fa-2x" ></i></button></center>
+                      </div>
+                      <div class="card-footer">
+                        <input type="text" class="form-control campoPalpite" id="palpite" >
+                      </div>
+                    </div>
+                    </div>
+        
+        </div>
+    
+
+    <!--Js proprio-->
+    <script src=JS/main.js></script>
+   
+
+</body>
+</html>

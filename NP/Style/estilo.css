@@ -1,0 +1,104 @@
+
+body{
+	padding: 0px;
+	background-image:linear-gradient(to right, rgb(0, 0, 0), rgb(230, 0, 0));
+    background-repeat: repeat;
+    background-size: cover;
+	padding-left: 50px;
+}
+
+#header{
+	width: 97.1%;
+	height: 50px; 
+	position: fixed;
+	padding: 20px;
+	top: 0;
+	margin-left: 0;
+    text-align: center;
+    color: #fff;
+	}
+
+#pontuacao h1{
+    font-family: "verdana"; 
+    font-size: 40px; 
+}
+
+#third{
+    position: fixed;
+    bottom: 0;
+    left:0;
+}
+
+
+
+audio{
+position: fixed;
+margin-top: 100px;
+}
+
+#xyz{
+    display: inline;
+    position: absolute;
+}
+
+.song{
+		margin: 25px;
+		float: left;
+		width: 120px;
+		height: 120px;
+        padding: 10px;
+		background-color: rgba(241, 16, 0, 0.8);
+		border-bottom-right-radius: 10%;
+		border-top-left-radius: 10%;
+		border-bottom-left-radius: 10%;
+		border-top-right-radius: 10%;
+}
+
+.play{
+		border-color: rgba(1,1,1,0.5);
+		background:transparent url("play.png");
+		mix-blend-mode: multiply;
+		background-size: cover;
+		border-bottom-left-radius: 50%;
+		border-top-left-radius: 50%;
+		border-bottom-right-radius: 50%;
+		border-top-right-radius: 50%;
+		height: 50px;
+		width: 50px;
+		margin-left: 30%;
+		margin-top: 15%;
+}
+
+.play:hover{
+		box-shadow: 0px 0px 5px 5px black;
+		border-color: black;
+		background-color: rgba(1,1,1);
+		border-bottom-left-radius: 50%;
+		border-top-left-radius: 50%;
+		border-bottom-right-radius: 50%;
+		border-top-right-radius: 50%;	
+}
+
+
+/*.caixinha {
+    width: 110px;
+	border-bottom-left-radius: 25%;
+	border-top-left-radius: 25%;
+	border-bottom-right-radius: 25%;
+	border-top-right-radius: 25%;
+}*/
+
+.answer{
+	background-color: rgba(238, 107, 97, 0.8);
+	margin-top: 10px;
+	margin-left: 12px;
+	border-bottom-left-radius: 10%;
+	border-top-left-radius: 10%;
+	border-bottom-right-radius: 10%;
+	border-top-right-radius: 10%;	
+}
+
+.answer:hover{
+	box-shadow: 0px 0px 5px 5px black;
+	border-color: black;
+}
