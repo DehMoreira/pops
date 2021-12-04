@@ -41,8 +41,8 @@ var answers =["da cor do pecado", "estrela guia", "boogie oogie", "avenida brasi
 			"pe na jaca", "pequena travessa", "o beijo do vampiro", "alto astral", "irmaos coragem", "o setimo guardiao", "verdades secretas",
 			"o rei do gado", "a favorita", "caminhos do coracao", "chocolate com pimenta"];
 
+
 var bool=[];
-var songs= new Array(path.length);
 var pontos = 0;
 
 
@@ -50,9 +50,6 @@ document.getElementById("pontos").innerHTML =  "00 / " + path.length;
 
 //cria os players
 for (var i = 0; i<path.length; i++) {
-	songs[i]=new Array(2);
-	songs[i][0]=path[i];
-
 	var ins=document.createElement("div");
 	ins.id='b'+i;
 	ins.setAttribute("class", "song");

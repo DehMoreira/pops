@@ -33,10 +33,4 @@ msc32 = o rei do gado
 msc33 = a favorita
 msc34 = caminhos do coracao
 msc35 = chocolate com pimenta
-msc36 = morde e assopra
-msc37 = esmeralda
-msc38 = orfaos da terra
-msc39 = negocio da china
-msc40 = o cravo e a rosa
-msc41 = a padroeira
-msc42 = cumplices de um resgate
+
