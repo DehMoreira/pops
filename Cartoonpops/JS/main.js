@@ -87,8 +87,8 @@ function verifica(elem){
 
 	var palpite=prompt("Resposta:");
 	var palpiteMin = palpite.toLowerCase();
-
-
+	var semAcento = palpiteMin.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+	
 	if (resposta.includes('|')){
 		var separa = resposta.split(" | ");
 		resposta = separa[0];
@@ -96,7 +96,7 @@ function verifica(elem){
 	}
 
 	
-	if(palpiteMin == resposta || palpiteMin == auxResposta) {
+	if(semAcento == resposta || semAcento == auxResposta) {
 		document.getElementById('b'+ indice).style.backgroundColor = 'green';
 		var excluir = document.getElementById('ok'+indice);
  		excluir.parentNode.removeChild(excluir);

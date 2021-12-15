@@ -82,9 +82,10 @@ function verifica(elem){
 
 	var palpite=prompt("Resposta:");
 	var palpiteMin = palpite.toLowerCase();
+	var semAcento = palpiteMin.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
 
 
-	if(palpiteMin == resposta) {
+	if(semAcento == resposta) {
 		//alert("acertou");
 		document.getElementById('b'+ indice).style.backgroundColor = 'green';
 		var excluir = document.getElementById('ok'+indice);
