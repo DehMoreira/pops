@@ -35,11 +35,13 @@ var path=["musicas\\msc1.mp3"
 ,"musicas\\msc35.mp3"
 ];
 
-var answers =["da cor do pecado", "estrela guia", "boogie oogie", "avenida brasil", "bela a feia", "paraiso", "por amor", "o outro lado do paraiso",
-			"pantanal", "passione", "a gata comeu", "cheias de charme", "bom sucesso", "sinha moca", "verao 90", "porto dos milagres", 
-			"o profeta", "era uma vez", "floribella", "duas caras", "a escrava isaura", "cama de gato", "cabocla", "roque santeiro",
-			"pe na jaca", "pequena travessa", "o beijo do vampiro", "alto astral", "irmaos coragem", "o setimo guardiao", "verdades secretas",
-			"o rei do gado", "a favorita", "caminhos do coracao", "chocolate com pimenta"];
+var answers =[ "video show", "toma la da ca", "friends", "cocorico", "domingao do faustao", "pe na cova", "tapas e beijos", 
+				"altas horas", "casos de familia", "chapolin | o chapolin colorado",	"two and a half men | dois homens e meio", 
+				"barney", "disney club | disney cruj", "fantasia", "globo esporte", "zorra total", "tv pirata", "a diarista", 
+				"passa ou repassa", "cassino do chacrinha | chacrinha", "arnold | diffrent strokes", "xuxa no mundo da imaginacao", 
+				"casa dos artistas", "masterchef", "hoje em dia", "viva o gordo",  "sandy e junior", "a grande familia", 
+				"sitio do picapau amarelo", "a usurpadora | la usurpadora", "lost", "mega senha", "programa silvio santos | silvio santos",
+				 "teletubbies", "one tree hill | lances da vida" ];
 
 
 var bool=[];
@@ -77,24 +79,34 @@ function play(elem){
 
 function verifica(elem){
 	var pegaId = elem.id.split("ok");
-	var indice = pegaId[1];
+	var indice = pegaId[1];	
 	var resposta = answers[indice];
+	var auxResposta = resposta;
 
 	var palpite=prompt("Resposta:");
 	var palpiteMin = palpite.toLowerCase();
 	console.log(palpiteMin);
 
-	if(palpite == resposta) {
-		//alert("acertou");
+
+	if (resposta.includes('|')){
+		var separa = resposta.split(" | ");
+		resposta = separa[0];
+		auxResposta = separa[1]; 
+	}
+
+	
+	if(palpiteMin == resposta || palpiteMin == auxResposta) {
 		document.getElementById('b'+ indice).style.backgroundColor = 'green';
 		var excluir = document.getElementById('ok'+indice);
  		excluir.parentNode.removeChild(excluir);
-		
 		atualizaPonto();
+		return false;
 	}
+	
 
-	else{
-		alert("Tente novamente");
+	else {
+		alert("Tente novamente!!");
+		return false;
 	}
 
 }

@@ -82,9 +82,9 @@ function verifica(elem){
 
 	var palpite=prompt("Resposta:");
 	var palpiteMin = palpite.toLowerCase();
-	console.log(palpiteMin);
 
-	if(palpite == resposta) {
+
+	if(palpiteMin == resposta) {
 		//alert("acertou");
 		document.getElementById('b'+ indice).style.backgroundColor = 'green';
 		var excluir = document.getElementById('ok'+indice);

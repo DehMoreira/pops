@@ -35,14 +35,17 @@ var path=["musicas\\msc1.mp3"
 ,"musicas\\msc35.mp3"
 ];
 
-var answers =["da cor do pecado", "estrela guia", "boogie oogie", "avenida brasil", "bela a feia", "paraiso", "por amor", "o outro lado do paraiso",
-			"pantanal", "passione", "a gata comeu", "cheias de charme", "bom sucesso", "sinha moca", "verao 90", "porto dos milagres", 
-			"o profeta", "era uma vez", "floribella", "duas caras", "a escrava isaura", "cama de gato", "cabocla", "roque santeiro",
-			"pe na jaca", "pequena travessa", "o beijo do vampiro", "alto astral", "irmaos coragem", "o setimo guardiao", "verdades secretas",
-			"o rei do gado", "a favorita", "caminhos do coracao", "chocolate com pimenta"];
+var answers=["as tartarugas ninja | teenage mutant ninja turtles", "a turma do perere", "manda chuva | top cat",
+ 			"os simpsons | the simpsons", "a pantera cor de rosa | 	the pink phink", "du dudu e edu | ed edd n eddy",
+			"doug | doug funnie", "os backyardigans | the backyardigans", "bob esponja | spongeBob squarePants", 
+			"scooby doo", "a turma da monica", "george o rei da floresta | george of the jungle", "thundercats",
+			"tom e jerry | tom and jerry", "os rugrats | the rugrats", "hamtaro", "a pequena sereia | the little mermaid",
+			"sakura | sakura card captors", "timao e pumba | timao and pumba", "rick e morty | rick and morty", "pingu",
+			"a hora do recreio | recess", "franklin", "os jetsons | the jetsons", "ursinhos carinhosos | care bears",
+			"phineas e ferb | phineas and ferb", "as trigemeas | les tres bessones", "o laboratorio de dexter | dexters laboratory", 
+			"catdog", "pinky e o cerebro", "os padrinhos magicos", "os caezinhos do canil", "dragon ball gt", 
+			"os jovens titas | teen titans", "o clube das winx | winx club"];
 
-
-var bool=[];
 var pontos = 0;
 
 
@@ -77,24 +80,34 @@ function play(elem){
 
 function verifica(elem){
 	var pegaId = elem.id.split("ok");
-	var indice = pegaId[1];
+	var indice = pegaId[1];	
+
 	var resposta = answers[indice];
+	var auxResposta = resposta;
 
 	var palpite=prompt("Resposta:");
 	var palpiteMin = palpite.toLowerCase();
-	console.log(palpiteMin);
 
-	if(palpite == resposta) {
-		//alert("acertou");
+
+	if (resposta.includes('|')){
+		var separa = resposta.split(" | ");
+		resposta = separa[0];
+		auxResposta = separa[1]; 
+	}
+
+	
+	if(palpiteMin == resposta || palpiteMin == auxResposta) {
 		document.getElementById('b'+ indice).style.backgroundColor = 'green';
 		var excluir = document.getElementById('ok'+indice);
  		excluir.parentNode.removeChild(excluir);
-		
 		atualizaPonto();
+		return false;
 	}
+	
 
-	else{
-		alert("Tente novamente");
+	else {
+		alert("Tente novamente!!");
+		return false;
 	}
 
 }

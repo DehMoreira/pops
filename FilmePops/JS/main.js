@@ -77,24 +77,34 @@ function play(elem){
 
 function verifica(elem){
 	var pegaId = elem.id.split("ok");
-	var indice = pegaId[1];
+	var indice = pegaId[1];	
 	var resposta = answers[indice];
+	var auxResposta = resposta;
 
 	var palpite=prompt("Resposta:");
 	var palpiteMin = palpite.toLowerCase();
-	console.log(palpiteMin);
 
-	if(palpite == resposta) {
-		//alert("acertou");
+
+
+	if (resposta.includes('|')){
+		var separa = resposta.split(" | ");
+		resposta = separa[0];
+		auxResposta = separa[1]; 
+	}
+
+	
+	if(palpiteMin == resposta || palpiteMin == auxResposta) {
 		document.getElementById('b'+ indice).style.backgroundColor = 'green';
 		var excluir = document.getElementById('ok'+indice);
  		excluir.parentNode.removeChild(excluir);
-		
 		atualizaPonto();
+		return false;
 	}
+	
 
-	else{
-		alert("Tente novamente");
+	else {
+		alert("Tente novamente!!");
+		return false;
 	}
 
 }
