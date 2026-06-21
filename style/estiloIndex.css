@@ -1,12 +1,183 @@
-.texto{
-    text-align: justify;
+/* ========================================================
+   ESTILO GLOBAL E PALETA COMFORT / PREMIUM
+   ======================================================== */
+:root {
+    --bg-creme: #fdfaf2;
+    --texto-escuro: #3e2723;
+    --borda-suame: #ebdcb9;
+    
+    /* Cores dos cards de temas */
+    --c-novela: #fbc4c4;
+    --c-novela-hover: #d62828;
+    --c-desenho: #ffe599;
+    --c-desenho-hover: #ffb703;
+    --c-tv: #e1bee7;
+    --c-tv-hover: #7209b7;
+    --c-filme: #ffccbc;
+    --c-filme-hover: #bc1823;
 }
 
-.paragrafo{
-    border-right: 2px dotted rgba(167, 160, 160, 0.5);
-    padding-right: 10px;
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-creme);
+    color: var(--texto-escuro);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
 }
 
-.principal{
-    margin: 2%;
+.main-container {
+    max-width: 1100px;
+    width: 100%;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+/* LOGO PRINCIPAL */
+.logo-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo-text {
+    font-size: 54px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #ebd090;
+    text-shadow: 2px 2px 0px var(--texto-escuro);
+    margin: 0;
+}
+
+/* SEÇÃO DE INFOS / INSTRUÇÕES (Duas colunas simétricas) */
+.info-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.info-card {
+    background: #ffffff;
+    border: 2px solid var(--borda-suame);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(62, 39, 35, 0.04);
+}
+
+.info-card h2 {
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: 800;
+    border-bottom: 2px solid var(--borda-suame);
+    padding-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.info-card p {
+    line-height: 1.6;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.info-card ul {
+    padding-left: 20px;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+/* Caixa de Dica */
+.tip-box {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+/* MENU DE SELEÇÃO DOS TEMAS */
+.menu-section {
+    text-align: center;
+}
+
+.menu-title {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+/* Grid de Botões (4 Colunas) */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* Os Cards Interativos */
+.menu-card {
+    background: #ffffff;
+    border: 2px solid var(--borda-suame);
+    border-radius: 16px;
+    padding: 25px 15px;
+    text-decoration: none;
+    color: var(--texto-escuro);
+    transition: all 0.25s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+    transition: transform 0.2s;
+}
+
+.menu-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.menu-card p {
+    margin: 0;
+    font-size: 12px;
+    opacity: 0.7;
+    line-height: 1.4;
+}
+
+/* Efeito de Hover Personalizado para cada Tema */
+.menu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(62, 39, 35, 0.12);
+}
+.menu-card:hover .card-icon {
+    transform: scale(1.15);
+}
+
+.card-novelas:hover { background-color: var(--c-novela) !important; border-color: var(--c-novela-hover) !important; }
+.card-desenhos:hover { background-color: var(--c-desenho) !important; border-color: var(--c-desenho-hover) !important; }
+.card-tv:hover { background-color: var(--c-tv) !important; border-color: var(--c-tv-hover) !important; }
+.card-filmes:hover { background-color: var(--c-filme) !important; border-color: var(--c-filme-hover) !important; }
+
+/* RODAPÉ */
+.footer {
+    text-align: center;
+    margin-top: 60px;
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+/* Responsividade */
+@media (max-width: 850px) {
+    .info-section { grid-template-columns: 1fr; }
+    .button-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+    .button-grid { grid-template-columns: 1fr; }
 }

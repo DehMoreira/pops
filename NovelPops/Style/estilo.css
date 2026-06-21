@@ -1,14 +1,149 @@
-
-body{
-	background-image:linear-gradient(to right, rgb(0, 0, 0), rgb(230, 0, 0));
+/* ========================================================
+   VARIÁVEIS DE CORES: TEMA NOVELAS (VERMELHO & CREME)
+   ======================================================== */
+:root {
+    --novela-creme: #fef8f5;      /* Fundo creme bem suave, levemente aquecido */
+    --novela-vermelho: #d62828;   /* Vermelho dramático de paixão de novela */
+    --novela-hover: #e63946;      /* Vermelho vibrante ao passar o mouse */
+    --novela-texto: #4a0e10;       /* Vinho bem escuro para contrastar os textos */
+    --novela-input: #fffaf8;      /* Fundo do campo de resposta */
 }
 
-.song{
-		background-color: rgba(241, 16, 0, 0.8);
+/* ========================================================
+   ESTILO DA TELA
+   ======================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    padding-top: 100px;
+    background: radial-gradient(circle, #ffffff 0%, var(--novela-creme) 100%) !important;
+    color: var(--novela-texto);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
 }
 
-.answer{
-	background-color: rgba(238, 107, 97, 0.8);
+audio, video { display: none !important; }
+
+/* HEADER (Placar Fixo) */
+#header {
+    width: 100%;
+    height: 70px; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(254, 248, 245, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 4px solid var(--novela-vermelho); /* Linha vermelha marcante */
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    z-index: 1000;
 }
 
+#pontos {
+    font-size: 32px; 
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--novela-texto) !important;
+    margin: 0;
+}
 
+/* CONTAINER (7 colunas perfeitas) */
+#players {
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr) !important; 
+    gap: 16px !important; 
+    max-width: 1000px; 
+    margin: 40px auto !important; 
+    padding: 20px;
+    justify-content: center;
+}
+
+/* AS CAIXINHAS (CARDS EM VERMELHO NOVELA) */
+.song {
+    background-color: var(--novela-vermelho) !important;
+    border: 3px solid #9e1b1b !important; /* Borda vinho profunda para dar acabamento */
+    border-radius: 16px !important; 
+    padding: 12px !important;
+    width: 115px !important;  
+    height: 125px !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin: 0 auto !important; 
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 5px 12px rgba(74, 14, 16, 0.15);
+}
+
+.song:hover {
+    transform: translateY(-4px);
+    background-color: var(--novela-hover) !important;
+    border-color: var(--novela-vermelho) !important;
+    box-shadow: 0 8px 16px rgba(214, 40, 40, 0.25) !important;
+}
+
+/* Número do Pop */
+.pop-num {
+    font-size: 14px;
+    font-weight: 900;
+    color: #ffffff; /* Número branco para destacar no bloco vermelho */
+}
+
+/* BOTÃO DE PLAY (Vinho Escuro com Triângulo Creme) */
+.play {
+    border: none !important;
+    background: var(--novela-texto) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fef8f5'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") no-repeat center !important;
+    background-size: 55% !important;
+    border-radius: 50% !important;
+    height: 44px !important;
+    width: 44px !important;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.play:hover {
+    background-color: #6e171a !important;
+    transform: scale(1.1);
+}
+
+/* CAMPO DE RESPOSTA (INPUT) */
+.answer {
+    width: 100% !important;
+    padding: 5px !important;
+    font-size: 11px !important;
+    font-weight: 800;
+    text-align: center;
+    border-radius: 8px !important;
+    border: 2px solid #9e1b1b !important;
+    background-color: var(--novela-input) !important;
+    color: var(--novela-texto) !important;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.answer:focus {
+    border-color: var(--novela-texto) !important;
+    background-color: #ffffff !important;
+}
+
+/* ACERTOU (VERDE PASTEL SUAVE PARA COMBINAR COM O CREME) */
+.song.acertou {
+    border-color: #2ed573 !important;
+    background-color: #e2f5e9 !important; 
+    box-shadow: 0 0 12px rgba(46, 213, 115, 0.3) !important;
+}
+.song.acertou .answer {
+    background-color: #2ed573 !important;
+    color: #ffffff !important;
+    border-color: #2ed573 !important;
+    font-weight: 900;
+}
+.song.acertou .pop-num {
+    color: #1e7e34;
+}
+
+/* Responsividade */
+@media (max-width: 992px) { #players { grid-template-columns: repeat(4, 1fr) !important; } }
+@media (max-width: 550px) { #players { grid-template-columns: repeat(3, 1fr) !important; } }

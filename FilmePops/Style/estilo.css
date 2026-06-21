@@ -1,16 +1,153 @@
-
-body{
-	background-image:linear-gradient(to right, rgb(0, 0, 0), rgb(21, 117, 243));
+/* ========================================================
+   VARIÁVEIS DE CORES: TEMA FILMES / CINEMA
+   ======================================================== */
+:root {
+    --cinema-fundo: #141419;      /* Fundo cinza-escuro premium (sala de cinema) */
+    --cinema-vermelho: #bc1823;   /* Vermelho tapete vermelho / cortina de gala */
+    --cinema-hover: #dc2630;      /* Vermelho mais vivo ao passar o mouse */
+    --cinema-dourado: #e0a916;    /* Dourado do Oscar para detalhes importantes */
+    --cinema-creme: #fcf8f2;      /* Letras e inputs claros elegantes */
 }
 
-.song{
-		background-color: rgba(62, 131, 223, 0.8);
+/* ========================================================
+   ESTILO GERAL DO JOGO (TEMA FILMES)
+   ======================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    padding-top: 100px;
+    background: radial-gradient(circle, #23232e 0%, var(--cinema-fundo) 100%) !important;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
 }
 
-.answer{
-	background-color: rgba(87, 179, 233, 0.8);
-	color:rgb(177, 212, 235);
-	border: 10px;
+audio, video {
+    display: none !important;
 }
 
+/* O HEADER (Placar Fixo no Topo) */
+#header {
+    width: 100%;
+    height: 70px; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(20, 20, 25, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 3px solid var(--cinema-dourado); /* Linha dourada luxo */
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    z-index: 1000;
+}
 
+#pontos {
+    font-size: 32px; 
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--cinema-dourado) !important;
+    text-shadow: 0 0 12px rgba(224, 169, 22, 0.4);
+    margin: 0;
+}
+
+/* CONTAINER (7 Colunas Perfeitas) */
+#players {
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr) !important; 
+    gap: 15px !important; 
+    max-width: 1000px; 
+    margin: 40px auto !important; 
+    padding: 20px;
+    justify-content: center;
+}
+
+/* OS QUADRADINHOS (CARDS EM VERMELHO TAPETE DE GALA) */
+.song {
+    background-color: var(--cinema-vermelho) !important;
+    border: 2px solid #820e15 !important;
+    border-radius: 14px !important; 
+    padding: 12px !important;
+    width: 115px !important;  
+    height: 125px !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin: 0 auto !important; 
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.song:hover {
+    transform: translateY(-4px);
+    background-color: var(--cinema-hover) !important;
+    border-color: var(--cinema-dourado) !important;
+    box-shadow: 0 0 15px rgba(224, 169, 22, 0.3) !important;
+}
+
+/* O Número do Pop */
+.pop-num {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--cinema-creme);
+}
+
+/* BOTÃO DE PLAY (Dourado Luxo com Triângulo Cinema embutido) */
+.play {
+    border: none !important;
+    background: var(--cinema-dourado) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23141419'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") no-repeat center !important;
+    background-size: 55% !important;
+    border-radius: 50% !important;
+    height: 44px !important;
+    width: 44px !important;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+.play:hover {
+    background-color: #f7c339 !important;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(247, 195, 57, 0.6);
+}
+
+/* CAMPO DE RESPOSTA (INPUT CLARO ELEGANTE) */
+.answer {
+    width: 100% !important;
+    padding: 5px !important;
+    font-size: 11px !important;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 8px !important;
+    border: 2px solid #820e15 !important;
+    background-color: var(--cinema-creme) !important;
+    color: #141419 !important;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.answer:focus {
+    border-color: var(--cinema-dourado) !important;
+    background-color: #ffffff !important;
+}
+
+/* ACERTOU (VERDE CINEMA DE DEVER CUMPRIDO) */
+.song.acertou {
+    border-color: #00ff88 !important;
+    background-color: #0c2b18 !important;
+    box-shadow: 0 0 18px rgba(0, 255, 136, 0.4) !important;
+}
+.song.acertou .answer {
+    background-color: #00ff88 !important;
+    color: #141419 !important;
+    border-color: #00ff88 !important;
+    font-weight: 900;
+}
+.song.acertou .pop-num {
+    color: #00ff88;
+}
+
+/* Responsividade */
+@media (max-width: 992px) { #players { grid-template-columns: repeat(4, 1fr) !important; } }
+@media (max-width: 550px) { #players { grid-template-columns: repeat(3, 1fr) !important; } }

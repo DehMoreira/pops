@@ -1,14 +1,157 @@
-
-body{
-	background-image:linear-gradient(to right, rgb(236, 222, 183), rgb(240, 186, 10));
+/* ========================================================
+   VARIÁVEIS DE CORES: CARTOON RETRÔ / ILUMINADO
+   ======================================================== */
+:root {
+    --cor-fundo-creme: #fdf6e2;   /* Fundo creme claro, confortável para os olhos */
+    --cor-card-amarelo: #f4c430;  /* Amarelo dourado lindo para as caixinhas */
+    --cor-card-hover: #ffd54f;    /* Amarelo um pouco mais claro ao passar o mouse */
+    --cor-texto-escuro: #3e2723;  /* Marrom escuro para contrastar perfeitamente */
+    --cor-input-fundo: #fffde7;   /* Fundo das caixinhas de resposta */
 }
 
-.song{
-		background-color: rgb(196, 162, 50);
+/* ========================================================
+   ESTILO GERAL DO JOGO (TEMA CARTOON CLARO)
+   ======================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    padding-top: 100px; /* Espaço para o placar fixo lá em cima */
+    background: radial-gradient(circle, #fffdf6 0%, var(--cor-fundo-creme) 100%) !important; /* Fundo creme claro */
+    color: var(--cor-texto-escuro);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
 }
 
-.answer{
-	background-color: rgba(240, 233, 174, 0.904);
+/* Força os players nativos a sumirem */
+audio, video {
+    display: none !important;
 }
 
+/* O HEADER (Placar Fixo no Topo) */
+#header {
+    width: 100%;
+    height: 70px; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(253, 246, 226, 0.95); /* Acompanha o creme do fundo */
+    backdrop-filter: blur(10px);
+    border-bottom: 4px solid var(--cor-card-amarelo); /* Linha amarela grossa pop */
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    z-index: 1000;
+}
 
+#pontos {
+    font-size: 32px; 
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--cor-texto-escuro) !important; /* Placar em marrom escuro combinando */
+    margin: 0;
+}
+
+/* O CONTAINER PRINCIPAL (7 Colunas) */
+#players {
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr) !important; 
+    gap: 16px !important; 
+    max-width: 1000px; 
+    margin: 40px auto !important; 
+    padding: 20px;
+    justify-content: center;
+}
+
+/* A CAIXINHA DE CADA MÚSICA (CARD AMARELO) */
+.song {
+    background-color: var(--cor-card-amarelo) !important; /* Quadradinho em tom de amarelo */
+    border: 3px solid #b58d10 !important; /* Borda dourada mais escura para dar profundidade */
+    border-radius: 16px !important; 
+    padding: 12px !important;
+    width: 115px !important;  
+    height: 125px !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin: 0 auto !important; 
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 5px 10px rgba(62, 39, 35, 0.15); /* Sombra suave */
+}
+
+.song:hover {
+    transform: translateY(-4px);
+    background-color: var(--cor-card-hover) !important;
+    border-color: var(--cor-card-amarelo) !important;
+    box-shadow: 0 8px 16px rgba(62, 39, 35, 0.25) !important;
+}
+
+/* O Número do Pop */
+.pop-num {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--cor-texto-escuro); /* Número escuro bem legível no fundo amarelo */
+}
+
+/* BOTÃO DE PLAY (Vetor SVG embutido ajustado para o tema claro) */
+.play {
+    border: none !important;
+    /* Botão redondo marrom chocolate com triângulo creme por dentro */
+    background: var(--cor-texto-escuro) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fdf6e2'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") no-repeat center !important;
+    background-size: 55% !important;
+    border-radius: 50% !important;
+    height: 44px !important;
+    width: 44px !important;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.play:hover {
+    background-color: #5d4037 !important; /* Marrom levemente mais claro no hover */
+    transform: scale(1.1);
+}
+
+/* CAMPO DE RESPOSTA (INPUT) */
+.answer {
+    width: 100% !important;
+    padding: 5px !important;
+    font-size: 11px !important;
+    font-weight: 800;
+    text-align: center;
+    border-radius: 8px !important;
+    border: 2px solid #b58d10 !important;
+    background-color: var(--cor-input-fundo) !important;
+    color: var(--cor-texto-escuro) !important;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.answer:focus {
+    border-color: var(--cor-texto-escuro) !important;
+    background-color: #ffffff !important;
+}
+
+/* QUANDO O JOGADOR ACERTAR A MÚSICA (VERDE SUCESSO COMFORT) */
+.song.acertou {
+    border-color: #2ed573 !important;
+    background-color: #d4edda !important; /* Verde pastel suave para combinar com o creme */
+    box-shadow: 0 0 12px rgba(46, 213, 115, 0.3) !important;
+}
+.song.acertou .answer {
+    background-color: #2ed573 !important;
+    color: #ffffff !important;
+    border-color: #2ed573 !important;
+    font-weight: 900;
+}
+.song.acertou .pop-num {
+    color: #155724;
+}
+
+/* RESPONSIVIDADE (Para Celulares e Tablets) */
+@media (max-width: 992px) {
+    #players { grid-template-columns: repeat(4, 1fr) !important; }
+}
+@media (max-width: 550px) {
+    #players { grid-template-columns: repeat(3, 1fr) !important; }
+}
