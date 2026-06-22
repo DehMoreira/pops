@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games Pops</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <header id="header">
+        <a href="index.html" class="btn-voltar" title="Voltar ao Menu">🏠</a>
+        <h1 id="pontos">0 / 35</h1>
+        <button id="btn-reset" class="btn-reiniciar" title="Reiniciar Jogo">🗑️</button>
+    </header>
+
+    <main id="players">
+        </main>
+
+    <div class="modal-overlay" id="modal-vitoria">
+        <div class="modal-content">
+            <div class="modal-icon">🏆</div>
+            <h2 id="modal-titulo">Você conseguiu!</h2>
+            <p>Parabéns! Você adivinhou todos os áudios desta categoria.</p>
+            <div class="modal-score">35 / 35 Acertos</div>
+            <button class="btn-menu" onclick="window.location.href='index.html'">Voltar ao Menu</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

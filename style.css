@@ -62,7 +62,7 @@ body {
 }
 
 .info-card {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.85); /* Fundo levemente transparente */
     border: 2px solid var(--borda-suame);
     border-radius: 16px;
     padding: 25px;
@@ -112,11 +112,13 @@ body {
     letter-spacing: 1px;
 }
 
-/* Grid de Botões (4 Colunas) */
+/* Ajuste no Grid para centralizar e limitar o tamanho */
 .button-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    max-width: 900px; /* Limita a largura para não ficarem gigantes */
+    margin: 0 auto;   /* O segredo da centralização */
 }
 
 /* Os Cards Interativos */
@@ -155,8 +157,8 @@ body {
 
 /* Efeito de Hover Personalizado para cada Tema */
 .menu-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(62, 39, 35, 0.12);
+    transform: translateY(-8px); /* Deixei o pulo um pouquinho maior */
+    box-shadow: 0 15px 30px rgba(62, 39, 35, 0.12); /* Sombra mais destacada */
 }
 .menu-card:hover .card-icon {
     transform: scale(1.15);
@@ -174,13 +176,21 @@ body {
 
 .card-filmes:hover { background-color: var(--c-filme) !important; border-color: var(--c-filme-hover) !important; }
 
-/* RODAPÉ */
+/* RODAPÉ E ANIMAÇÃO DA FRASE */
 .footer {
     text-align: center;
     margin-top: 60px;
     font-weight: 900;
     font-size: 15px;
     letter-spacing: 1px;
+    color: #d62828; /* Cor vibrante */
+    animation: pulseText 2s infinite ease-in-out; /* A mágica do texto pulsando aqui */
+}
+
+@keyframes pulseText {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
 }
 
 /* Estilização do Rodapé da Página Inicial */
@@ -208,4 +218,14 @@ body {
 @media (max-width: 480px) {
     .button-grid { grid-template-columns: 1fr; }
     .main-footer p { font-size: 11px; }
+}
+
+.assinatura {
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #8d6e63; /* Um tom de marrom suave que combina com o tema */
+    font-family: 'Segoe UI', sans-serif;
+    opacity: 0.8;
 }
