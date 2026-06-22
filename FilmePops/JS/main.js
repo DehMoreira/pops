@@ -62,10 +62,10 @@ window.onload = function() {
         ins.id = 'b' + i;
         ins.setAttribute("class", "song");
         
-        ins.innerHTML = `
+		ins.innerHTML = `
             <span class="pop-num">${i + 1}</span>
             <input type="button" id="a${i}" class="play">
-            <input type="text" id="palpite${i}" class="answer" placeholder="..." autocomplete="off">
+            <input type="text" id="palpite${i}" class="answer" placeholder="Qual a música?" autocomplete="off">
         `;
         
         container.appendChild(ins);

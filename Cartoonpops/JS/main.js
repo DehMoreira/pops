@@ -85,7 +85,7 @@ window.onload = function() {
         ins.innerHTML = `
             <span class="pop-num">${i + 1}</span>
             <input type="button" id="a${i}" class="play">
-            <input type="text" id="palpite${i}" class="answer" placeholder="..." autocomplete="off">
+            <input type="text" id="palpite${i}" class="answer" placeholder="Qual o desenho?" autocomplete="off">
         `;
         
         container.appendChild(ins);

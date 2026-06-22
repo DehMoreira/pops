@@ -11,8 +11,11 @@
     --c-novela-hover: #d62828;
     --c-desenho: #ffe599;
     --c-desenho-hover: #ffb703;
-    --c-tv: #e1bee7;
-    --c-tv-hover: #7209b7;
+    
+    /* NOVO: Azul Pop para Programas de TV */
+    --c-tv: #eaf4fc;       
+    --c-tv-hover: #0984e3; 
+    
     --c-filme: #ffccbc;
     --c-filme-hover: #bc1823;
 }
@@ -161,7 +164,14 @@ body {
 
 .card-novelas:hover { background-color: var(--c-novela) !important; border-color: var(--c-novela-hover) !important; }
 .card-desenhos:hover { background-color: var(--c-desenho) !important; border-color: var(--c-desenho-hover) !important; }
-.card-tv:hover { background-color: var(--c-tv) !important; border-color: var(--c-tv-hover) !important; }
+
+/* Adicionada a sombra azulada junto com as variáveis no hover da TV */
+.card-tv:hover { 
+    background-color: var(--c-tv) !important; 
+    border-color: var(--c-tv-hover) !important; 
+    box-shadow: 0 10px 20px rgba(9, 132, 227, 0.2) !important;
+}
+
 .card-filmes:hover { background-color: var(--c-filme) !important; border-color: var(--c-filme-hover) !important; }
 
 /* RODAPÉ */
@@ -177,7 +187,7 @@ body {
 .main-footer {
     width: 100%;
     padding: 20px 15px;
-    margin-top: 40px; /* Dá um espaço confortável depois dos cards */
+    margin-top: 40px; 
     text-align: center;
     box-sizing: border-box;
 }
@@ -185,16 +195,9 @@ body {
 .main-footer p {
     font-size: 13px;
     line-height: 1.6;
-    color: #777777; /* Um tom de cinza discreto para não brigar com o visual */
-    max-width: 600px; /* Evita que o texto fique esticado demais em telas grandes */
+    color: #777777; 
+    max-width: 600px; 
     margin: 0 auto;
-}
-
-/* Ajuste rápido para telas pequenas */
-@media (max-width: 480px) {
-    .main-footer p {
-        font-size: 11px; /* Letra um pouquinho menor no celular para poupar espaço */
-    }
 }
 
 /* Responsividade */
@@ -204,4 +207,5 @@ body {
 }
 @media (max-width: 480px) {
     .button-grid { grid-template-columns: 1fr; }
+    .main-footer p { font-size: 11px; }
 }
