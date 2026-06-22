@@ -173,6 +173,30 @@ body {
     letter-spacing: 1px;
 }
 
+/* Estilização do Rodapé da Página Inicial */
+.main-footer {
+    width: 100%;
+    padding: 20px 15px;
+    margin-top: 40px; /* Dá um espaço confortável depois dos cards */
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.main-footer p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #777777; /* Um tom de cinza discreto para não brigar com o visual */
+    max-width: 600px; /* Evita que o texto fique esticado demais em telas grandes */
+    margin: 0 auto;
+}
+
+/* Ajuste rápido para telas pequenas */
+@media (max-width: 480px) {
+    .main-footer p {
+        font-size: 11px; /* Letra um pouquinho menor no celular para poupar espaço */
+    }
+}
+
 /* Responsividade */
 @media (max-width: 850px) {
     .info-section { grid-template-columns: 1fr; }
