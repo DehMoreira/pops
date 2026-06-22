@@ -48,11 +48,26 @@ window.onload = function() {
                 "os jovens titas | teen titans", "o clube das winx | winx club"];
 
     var pontos = 0;
-
-    // Identificador único para a memória desta categoria
     var STORAGE_KEY = "game_pops_desenhos";
 
-    // Busca ou cria a div 'players' no HTML
+    // 1. INJEÇÃO DOS BOTÕES NO HEADER AUTOMATICAMENTE
+    var header = document.getElementById("header");
+    if (header) {
+        var textoPlacarOrig = header.innerHTML;
+        header.innerHTML = `
+            <a href="../index.html" class="btn-voltar" title="Voltar ao Menu">🏠</a>
+            ${textoPlacarOrig}
+            <button id="btn-reset-game" class="btn-reiniciar" title="Reiniciar Jogo">🗑️</button>
+        `;
+        
+        document.getElementById("btn-reset-game").onclick = function() {
+            if (confirm("Deseja mesmo zerar seu progresso desta categoria e começar de novo?")) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
+        };
+    }
+
     var container = document.getElementById("players");
     if (!container) {
         container = document.createElement("div");
@@ -60,10 +75,8 @@ window.onload = function() {
         document.body.appendChild(container);
     }
 
-    // Carrega o histórico salvo (se existir) ou cria um objeto de progresso vazio
     var progressoSalvo = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
-    // Loop que gera a grade de botões e inputs na tela carregando a memória
     for (var i = 0; i < path.length; i++) {
         var ins = document.createElement("div");
         ins.id = 'b' + i;
@@ -76,33 +89,32 @@ window.onload = function() {
         `;
         
         container.appendChild(ins);
-
         var inputCampo = document.getElementById('palpite' + i);
 
-        // CHECAGEM DE MEMÓRIA: Restaura o card caso ele já tenha sido acertado antes
         if (progressoSalvo[i]) {
             ins.classList.add("acertou");
             inputCampo.disabled = true;
             inputCampo.value = progressoSalvo[i].toUpperCase();
-            pontos++; // Soma o ponto silenciosamente no carregamento
+            pontos++;
         } else {
-            // Se não foi acertado ainda, define os eventos normais de jogo
             document.getElementById('a' + i).onclick = function() {
                 play(this);
             };
             inputCampo.oninput = function() {
                 verificaInstantanea(this);
             };
+            // 2. MONITORA QUANDO O JOGADOR DIRETAMENTE SAI DO CAMPO (FEEDBACK ERRO)
+            inputCampo.onchange = function() {
+                aplicaFeedbackErro(this);
+            };
         }
     }    
 
-    // Atualiza o texto do placar no topo com os pontos carregados do banco local
     atualizaPlacarTexto();
 
     function play(elem) {
         var indice = elem.id.replace("a", "");
         var musica = path[indice];
-        
         var controle = document.getElementById("controle") || document.getElementById("som");
         if (controle) {
             controle.src = musica;
@@ -114,17 +126,13 @@ window.onload = function() {
     function verificaInstantanea(elem) {
         var indice = elem.id.replace("palpite", ""); 
         var respostaOriginal = answers[indice];
-        
         var palpite = elem.value;
         if (!palpite.trim()) return; 
 
-        // Padroniza e limpa a resposta do jogador
         var palpiteLimpo = palpite.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").trim();
-
         var resposta = respostaOriginal;
         var auxResposta = respostaOriginal;
 
-        // Trata os casos em que há títulos alternativos separados por "|"
         if (respostaOriginal.includes('|')) {
             var separa = respostaOriginal.split("|");
             resposta = separa[0].trim();
@@ -134,23 +142,20 @@ window.onload = function() {
             auxResposta = auxResposta.trim();
         }
 
-        // Padroniza e limpa as respostas cadastradas no banco para o teste ser justo
         var respostaLimpa = resposta.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").trim();
         var auxRespostaLimpa = auxResposta.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").trim();
 
-        // Se bater com qualquer uma das opções válidas, valida o acerto e salva localmente
         if (palpiteLimpo === respostaLimpa || palpiteLimpo === auxRespostaLimpa) {
             var card = document.getElementById('b' + indice);
             card.classList.add("acertou");
             
+            elem.classList.remove("erro-feedback");
             elem.disabled = true;
-            elem.value = resposta.toUpperCase(); // Trava o nome oficial no card
+            elem.value = resposta.toUpperCase(); 
             
-            // Pausa a música ao acertar
             var controle = document.getElementById("controle") || document.getElementById("som");
             if (controle) controle.pause();
 
-            // GRAVAÇÃO LOCAL: Registra este acerto no armazenamento do navegador
             progressoSalvo[indice] = resposta;
             localStorage.setItem(STORAGE_KEY, JSON.stringify(progressoSalvo));
 
@@ -158,11 +163,21 @@ window.onload = function() {
         }
     }
 
+    // 3. FUNÇÃO DO FEEDBACK VISUAL DE ERRO
+    function aplicaFeedbackErro(elem) {
+        if (elem.disabled || !elem.value.trim()) return;
+
+        elem.classList.add("erro-feedback");
+
+        setTimeout(function() {
+            elem.classList.remove("erro-feedback");
+        }, 400);
+    }
+
     function atualizaPonto() {
         pontos = pontos + 1;
         atualizaPlacarTexto();
 
-        // VERIFICAÇÃO DE VITÓRIA: Se acertou tudo, abre a janelinha modal
         if (pontos === path.length) {
             setTimeout(function() {
                 var finalScore = document.getElementById("score-final");
@@ -173,8 +188,6 @@ window.onload = function() {
             }, 600); 
         }
     }
-
-    function updatePlacar() {}
 
     function atualizaPlacarTexto() {
         var placar = document.getElementById("pontos");

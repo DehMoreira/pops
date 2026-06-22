@@ -43,9 +43,28 @@ window.onload = function() {
                 "o rei do gado", "a favorita", "caminhos do caracao", "chocolate com pimenta"];
 
     var pontos = 0;
-    
-    // Identificador único para esta categoria não misturar com as outras no LocalStorage
     var STORAGE_KEY = "game_pops_novelas";
+
+    // 1. INJEÇÃO DOS BOTÕES NO HEADER AUTOMATICAMENTE
+    var header = document.getElementById("header");
+    if (header) {
+        // Guarda o texto do placar original
+        var textoPlacarOrig = header.innerHTML;
+        // Limpa e reconstrói com os botões nas laterais
+        header.innerHTML = `
+            <a href="../index.html" class="btn-voltar" title="Voltar ao Menu">🏠</a>
+            ${textoPlacarOrig}
+            <button id="btn-reset-game" class="btn-reiniciar" title="Reiniciar Jogo">🗑️</button>
+        `;
+        
+        // Configura o clique do botão de reiniciar com confirmação
+        document.getElementById("btn-reset-game").onclick = function() {
+            if (confirm("Deseja mesmo zerar seu progresso desta categoria e começar de novo?")) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
+        };
+    }
 
     var container = document.getElementById("players");
     if (!container) {
@@ -54,10 +73,8 @@ window.onload = function() {
         document.body.appendChild(container);
     }
 
-    // Carrega o histórico salvo (se existir) ou cria um objeto vazio
     var progressoSalvo = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
-    // Monta a estrutura dos cards na tela
     for (var i = 0; i < path.length; i++) {
         var ins = document.createElement("div");
         ins.id = 'b' + i;
@@ -70,33 +87,32 @@ window.onload = function() {
         `;
         
         container.appendChild(ins);
-
         var inputCampo = document.getElementById('palpite' + i);
 
-        // CHECAGEM DE MEMÓRIA: Verifica se esse card específico já foi acertado no passado
         if (progressoSalvo[i]) {
             ins.classList.add("acertou");
             inputCampo.disabled = true;
             inputCampo.value = progressoSalvo[i].toUpperCase();
-            pontos++; // Incrementa o ponto direto no carregamento inicial
+            pontos++;
         } else {
-            // Se não foi acertado, ativa os cliques e digitação normalmente
             document.getElementById('a' + i).onclick = function() {
                 play(this);
             };
             inputCampo.oninput = function() {
                 verificaInstantanea(this);
             };
+            // 2. MONITORA QUANDO O JOGADOR DIRETAMENTE SAI DO CAMPO (FEEDBACK ERRO)
+            inputCampo.onchange = function() {
+                aplicaFeedbackErro(this);
+            };
         }
     }    
 
-    // Atualiza o placar no topo após computar o que já estava salvo
     atualizaPlacarTexto();
 
     function play(elem) {
         var indice = elem.id.replace("a", "");
         var musica = path[indice];
-        
         var controle = document.getElementById("controle") || document.getElementById("som");
         if (controle) {
             controle.src = musica;
@@ -108,12 +124,10 @@ window.onload = function() {
     function verificaInstantanea(elem) {
         var indice = elem.id.replace("palpite", ""); 
         var respostaOriginal = answers[indice];
-        
         var palpite = elem.value;
         if (!palpite.trim()) return; 
 
         var palpiteLimpo = palpite.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").trim();
-
         var resposta = respostaOriginal;
         var auxResposta = respostaOriginal;
 
@@ -133,13 +147,14 @@ window.onload = function() {
             var card = document.getElementById('b' + indice);
             card.classList.add("acertou");
             
+            // Remove a classe de erro caso ela estivesse ativa antes
+            elem.classList.remove("erro-feedback");
             elem.disabled = true;
             elem.value = resposta.toUpperCase(); 
             
             var controle = document.getElementById("controle") || document.getElementById("som");
             if (controle) controle.pause();
 
-            // GRAVAÇÃO NO CORAÇÃO DO NAVEGADOR: Salva que este índice acertou a resposta X
             progressoSalvo[indice] = resposta;
             localStorage.setItem(STORAGE_KEY, JSON.stringify(progressoSalvo));
 
@@ -147,11 +162,24 @@ window.onload = function() {
         }
     }
 
+    // 3. FUNÇÃO QUE FAZ O CAMPO TREMER SE RETIRAR O FOCO E ESTIVER ERRADO
+    function aplicaFeedbackErro(elem) {
+        // Se o campo já estiver desativado (porque acertou), ignore
+        if (elem.disabled || !elem.value.trim()) return;
+
+        // Adiciona o tremor visual e a borda vermelha
+        elem.classList.add("erro-feedback");
+
+        // Remove o efeito após a animação acabar (0.4s) para o jogador tentar de novo livremente
+        setTimeout(function() {
+            elem.classList.remove("erro-feedback");
+        }, 400);
+    }
+
     function atualizaPonto() {
         pontos = pontos + 1;
         atualizaPlacarTexto();
 
-        // Se o jogador completou todas, mostra a tela de vitória
         if (pontos === path.length) {
             setTimeout(function() {
                 var finalScore = document.getElementById("score-final");

@@ -248,6 +248,84 @@ audio, video {
     to { transform: translateY(-10px); }
 }
 
+
+/* ========================================================
+   NOVOS BOTÕES DO HEADER & FEEDBACK DE ERRO
+   ======================================================== */
+
+/* Ajuste do Header para acomodar os botões nas pontas */
+#header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 20px !important;
+    box-sizing: border-box;
+}
+
+/* Botão Voltar (Casinha) */
+.btn-voltar {
+    background: var(--cor-texto-escuro);
+    color: var(--cor-fundo-creme);
+    border: none;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+.btn-voltar:hover {
+    transform: scale(1.1);
+    background-color: var(--cor-card-hover);
+    color: var(--cor-texto-escuro);
+}
+
+/* Botão Reiniciar (Lixeira) */
+.btn-reiniciar {
+    background: #e5e5e5;
+    color: #555555;
+    border: none;
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.btn-reiniciar:hover {
+    transform: scale(1.1);
+    background-color: #ff4d4d;
+    color: #ffffff;
+}
+
+/* Classe de Erro (Animação de Tremor e Borda Vermelha) */
+.answer.erro-feedback {
+    border-color: #ff4d4d !important;
+    background-color: #ffe6e6 !important;
+    animation: tremeErro 0.4s ease-in-out;
+}
+
+@keyframes tremeErro {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-4px); }
+    40%, 80% { transform: translateX(4px); }
+}
+
+/* Ajuste para telas pequenas não espremerem o topo */
+@media (max-width: 450px) {
+    #header { padding: 0 10px !important; }
+    .btn-voltar, .btn-reiniciar { width: 34px; height: 34px; font-size: 16px; }
+}
+
 /* RESPONSIVIDADE (Para Celulares e Tablets) */
 /* Responsividade */
 /* ========================================================
@@ -307,3 +385,4 @@ audio, video {
         height: 105px !important;
     }
 }
+

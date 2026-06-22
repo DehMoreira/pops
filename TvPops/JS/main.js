@@ -4,16 +4,29 @@ window.onload = function() {
     var answers =[ "video show", "toma la da ca", "friends", "cocorico", "domingao do faustao", "pe na cova", "tapas e beijos", "altas horas", "casos de familia", "chapolin | o chapolin colorado", "two and a half men | dois homens e meio", "barney", "disney club | disney cruj", "fantasia", "globo esporte", "zorra total", "tv pirata", "a diarista", "passa ou repassa", "cassino do chacrinha | chacrinha", "arnold | diffrent strokes", "xuxa no mundo da imaginacao", "casa dos artistas", "masterchef", "hoje em dia", "viva o gordo", "sandy e junior", "a grande familia", "sitio do picapau amarelo", "a usurpadora | la usurpadora", "lost", "mega senha", "programa silvio santos | silvio santos", "teletubbies", "one tree hill | lances da vida" ];
 
     var pontos = 0;
-
-    // Identificador único para a memória desta categoria
     var STORAGE_KEY = "game_pops_tv";
 
-    var container = document.getElementById("players") || document.body;
+    // 1. INJEÇÃO DOS BOTÕES NO HEADER AUTOMATICAMENTE
+    var header = document.getElementById("header");
+    if (header) {
+        var textoPlacarOrig = header.innerHTML;
+        header.innerHTML = `
+            <a href="../index.html" class="btn-voltar" title="Voltar ao Menu">🏠</a>
+            ${textoPlacarOrig}
+            <button id="btn-reset-game" class="btn-reiniciar" title="Reiniciar Jogo">🗑️</button>
+        `;
+        
+        document.getElementById("btn-reset-game").onclick = function() {
+            if (confirm("Deseja mesmo zerar seu progresso desta categoria e começar de novo?")) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
+        };
+    }
 
-    // Carrega o histórico salvo no navegador (se houver)
+    var container = document.getElementById("players") || document.body;
     var progressoSalvo = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
-    // Loop que gera a grade de botões e inputs na tela carregando a memória
     for (var i = 0; i < path.length; i++) {
         var ins = document.createElement("div");
         ins.id = 'b' + i;
@@ -26,33 +39,32 @@ window.onload = function() {
         `;
         
         container.appendChild(ins);
-
         var inputCampo = document.getElementById('palpite' + i);
 
-        // CHECAGEM DE MEMÓRIA: Restaura o card caso ele já tenha sido acertado antes
         if (progressoSalvo[i]) {
             ins.classList.add("acertou");
             inputCampo.disabled = true;
             inputCampo.value = progressoSalvo[i].toUpperCase();
-            pontos++; // Soma o ponto direto no carregamento inicial
+            pontos++;
         } else {
-            // Se não foi respondido, ativa as ações normais de jogo
             document.getElementById('a' + i).onclick = function() {
                 play(this);
             };
             inputCampo.oninput = function() {
                 verificaInstantanea(this);
             };
+            // 2. MONITORA QUANDO O JOGADOR SAI DO CAMPO ERRANDO
+            inputCampo.onchange = function() {
+                aplicaFeedbackErro(this);
+            };
         }
     }    
 
-    // Atualiza o texto do placar no topo com os pontos carregados do armazenamento local
     atualizaPlacarTexto();
 
     function play(elem){
         var indice = elem.id.replace("a", "");
         var musica = path[indice];
-        
         var controle = document.getElementById("controle") || document.getElementById("som");
         if(controle) {
             controle.src = musica;
@@ -64,12 +76,10 @@ window.onload = function() {
     function verificaInstantanea(elem){
         var indice = elem.id.replace("palpite", ""); 
         var srcResposta = answers[indice];
-        
         var palpite = elem.value;
         if (!palpite.trim()) return; 
 
         var palpiteLimpo = palpite.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").trim();
-
         var resposta = srcResposta;
         var auxResposta = srcResposta;
 
@@ -89,13 +99,13 @@ window.onload = function() {
             var card = document.getElementById('b' + indice);
             card.classList.add("acertou"); 
             
+            elem.classList.remove("erro-feedback");
             elem.disabled = true;
             elem.value = resposta.toUpperCase();
             
             var controle = document.getElementById("controle") || document.getElementById("som");
             if (controle) controle.pause();
 
-            // GRAVAÇÃO LOCAL: Salva o acerto no navegador
             progressoSalvo[indice] = resposta;
             localStorage.setItem(STORAGE_KEY, JSON.stringify(progressoSalvo));
 
@@ -103,11 +113,21 @@ window.onload = function() {
         }
     }
 
+    // 3. FUNÇÃO DO FEEDBACK VISUAL DE ERRO
+    function aplicaFeedbackErro(elem) {
+        if (elem.disabled || !elem.value.trim()) return;
+
+        elem.classList.add("erro-feedback");
+
+        setTimeout(function() {
+            elem.classList.remove("erro-feedback");
+        }, 400);
+    }
+
     function atualizaPonto() {
         pontos = pontos + 1;
         atualizaPlacarTexto();
 
-        // VERIFICAÇÃO DE VITÓRIA: Abre o modal ao zerar
         if (pontos === path.length) {
             setTimeout(function() {
                 var finalScore = document.getElementById("score-final");
