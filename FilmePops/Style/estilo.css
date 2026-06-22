@@ -149,5 +149,60 @@ audio, video {
 }
 
 /* Responsividade */
-@media (max-width: 992px) { #players { grid-template-columns: repeat(4, 1fr) !important; } }
-@media (max-width: 550px) { #players { grid-template-columns: repeat(3, 1fr) !important; } }
+/* ========================================================
+   RESPONSIVIDADE E AJUSTES PARA CELULAR (UX PREMIUM)
+   ======================================================== */
+
+/* Para Tablets (Telas de até 992px de largura) */
+@media (max-width: 992px) {
+    #players { 
+        grid-template-columns: repeat(4, 1fr) !important; /* Cai para 4 colunas */
+        gap: 12px !important; 
+        max-width: 100%;
+        padding: 15px;
+    }
+}
+
+/* Para Celulares Médios/Grandes (Telas de até 600px de largura) */
+@media (max-width: 600px) {
+    #players { 
+        grid-template-columns: repeat(3, 1fr) !important; /* Exibe 3 colunas perfeitas e confortáveis */
+        gap: 10px !important; /* Diminui o espaçamento para sobrar espaço nas bordas */
+        padding: 10px;
+        margin: 20px auto !important;
+    }
+
+    /* Ajuste milimétrico no tamanho dos cards para não estourar a tela do celular */
+    .song {
+        width: 100px !important;  
+        height: 115px !important;
+        padding: 8px !important;
+        border-radius: 12px !important;
+    }
+
+    .play {
+        height: 38px !important;
+        width: 38px !important;
+    }
+
+    .answer {
+        font-size: 10px !important;
+        padding: 4px !important;
+    }
+    
+    #pontos {
+        font-size: 26px; /* Placar um pouquinho menor para o topo do celular respirar */
+    }
+}
+
+/* Para Celulares Muito Pequenos (Telas de até 360px de largura) */
+@media (max-width: 360px) {
+    #players { 
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 6px !important;
+    }
+    .song {
+        width: 85px !important;
+        height: 105px !important;
+    }
+}
