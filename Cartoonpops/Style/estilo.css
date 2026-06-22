@@ -148,6 +148,106 @@ audio, video {
     color: #155724;
 }
 
+
+/* ========================================================
+   TELA DE JOGO CONCLUÍDO (MODAL)
+   ======================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px); /* Borra o jogo ao fundo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* Classe que o JS vai injetar para mostrar a tela */
+.modal-overlay.mostrar {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 24px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    transform: scale(0.7);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: #3e2723; /* Mantém a paleta marrom/creme aconchegante */
+}
+
+.modal-overlay.mostrar .modal-content {
+    transform: scale(1);
+}
+
+.modal-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+    animation: pulaIcone 1s infinite alternate;
+}
+
+.modal-content h2 {
+    font-size: 28px;
+    font-weight: 900;
+    margin: 0 0 10px 0;
+    letter-spacing: 1px;
+}
+
+.modal-content p {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.modal-score {
+    background: #fff9e6;
+    border: 2px dashed #ffb703;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #b58d10;
+    margin-bottom: 25px;
+}
+
+/* Botão elegante para voltar */
+.btn-menu {
+    background: #3e2723;
+    color: #ffffff;
+    border: none;
+    padding: 14px 28px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.btn-menu:hover {
+    background: #5d4037;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(62, 39, 35, 0.2);
+}
+
+@keyframes pulaIcone {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+
 /* RESPONSIVIDADE (Para Celulares e Tablets) */
 /* Responsividade */
 /* ========================================================

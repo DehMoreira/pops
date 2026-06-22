@@ -40,9 +40,12 @@ window.onload = function() {
                 "pantanal", "passione", "a gata comeu", "cheias de charme", "bom sucesso", "sinha moca", "verao 90", "porto dos milagres", 
                 "o profeta", "era uma vez", "floribella", "duas caras", "a escrava isaura", "cama de gato", "cabocla", "roque santeiro",
                 "pe na jaca", "pequena travessa", "o beijo do vampiro", "alto astral", "irmaos coragem", "o setimo guardiao", "verdades secretas",
-                "o rei do gado", "a favorita", "caminhos do coracao", "chocolate com pimenta"];
+                "o rei do gado", "a favorita", "caminhos do caracao", "chocolate com pimenta"];
 
     var pontos = 0;
+    
+    // Identificador único para esta categoria não misturar com as outras no LocalStorage
+    var STORAGE_KEY = "game_pops_novelas";
 
     var container = document.getElementById("players");
     if (!container) {
@@ -51,9 +54,10 @@ window.onload = function() {
         document.body.appendChild(container);
     }
 
-    var placar = document.getElementById("pontos");
-    if (placar) placar.innerHTML = "00 / " + path.length; 
+    // Carrega o histórico salvo (se existir) ou cria um objeto vazio
+    var progressoSalvo = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
+    // Monta a estrutura dos cards na tela
     for (var i = 0; i < path.length; i++) {
         var ins = document.createElement("div");
         ins.id = 'b' + i;
@@ -67,14 +71,27 @@ window.onload = function() {
         
         container.appendChild(ins);
 
-        document.getElementById('a' + i).onclick = function() {
-            play(this);
-        };
+        var inputCampo = document.getElementById('palpite' + i);
 
-        document.getElementById('palpite' + i).oninput = function() {
-            verificaInstantanea(this);
-        };
+        // CHECAGEM DE MEMÓRIA: Verifica se esse card específico já foi acertado no passado
+        if (progressoSalvo[i]) {
+            ins.classList.add("acertou");
+            inputCampo.disabled = true;
+            inputCampo.value = progressoSalvo[i].toUpperCase();
+            pontos++; // Incrementa o ponto direto no carregamento inicial
+        } else {
+            // Se não foi acertado, ativa os cliques e digitação normalmente
+            document.getElementById('a' + i).onclick = function() {
+                play(this);
+            };
+            inputCampo.oninput = function() {
+                verificaInstantanea(this);
+            };
+        }
     }    
+
+    // Atualiza o placar no topo após computar o que já estava salvo
+    atualizaPlacarTexto();
 
     function play(elem) {
         var indice = elem.id.replace("a", "");
@@ -122,14 +139,31 @@ window.onload = function() {
             var controle = document.getElementById("controle") || document.getElementById("som");
             if (controle) controle.pause();
 
+            // GRAVAÇÃO NO CORAÇÃO DO NAVEGADOR: Salva que este índice acertou a resposta X
+            progressoSalvo[indice] = resposta;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(progressoSalvo));
+
             atualizaPonto();
         }
     }
 
-    function updatePlacar() {}
-
     function atualizaPonto() {
         pontos = pontos + 1;
+        atualizaPlacarTexto();
+
+        // Se o jogador completou todas, mostra a tela de vitória
+        if (pontos === path.length) {
+            setTimeout(function() {
+                var finalScore = document.getElementById("score-final");
+                if (finalScore) finalScore.innerHTML = pontos + " / " + path.length;
+
+                var modal = document.getElementById("modal-parabens");
+                if (modal) modal.classList.add("mostrar");
+            }, 600); 
+        }
+    }
+
+    function atualizaPlacarTexto() {
         var placar = document.getElementById("pontos");
         if (placar) {
             if (pontos < 10) {

@@ -5,11 +5,15 @@ window.onload = function() {
 
     var pontos = 0;
 
+    // Identificador único para a memória desta categoria
+    var STORAGE_KEY = "game_pops_tv";
+
     var container = document.getElementById("players") || document.body;
 
-    var placar = document.getElementById("pontos") || document.getElementById("pontuacao");
-    if(placar) placar.innerHTML = "00 / " + path.length; 
+    // Carrega o histórico salvo no navegador (se houver)
+    var progressoSalvo = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
+    // Loop que gera a grade de botões e inputs na tela carregando a memória
     for (var i = 0; i < path.length; i++) {
         var ins = document.createElement("div");
         ins.id = 'b' + i;
@@ -23,15 +27,27 @@ window.onload = function() {
         
         container.appendChild(ins);
 
-        document.getElementById('a' + i).onclick = function() {
-            play(this);
-        };
+        var inputCampo = document.getElementById('palpite' + i);
 
-        // ALTERADO PARA VERIFICAÇÃO EM TEMPO REAL: valida enquanto digita letra por letra
-        document.getElementById('palpite' + i).oninput = function() {
-            verificaInstantanea(this);
-        };
+        // CHECAGEM DE MEMÓRIA: Restaura o card caso ele já tenha sido acertado antes
+        if (progressoSalvo[i]) {
+            ins.classList.add("acertou");
+            inputCampo.disabled = true;
+            inputCampo.value = progressoSalvo[i].toUpperCase();
+            pontos++; // Soma o ponto direto no carregamento inicial
+        } else {
+            // Se não foi respondido, ativa as ações normais de jogo
+            document.getElementById('a' + i).onclick = function() {
+                play(this);
+            };
+            inputCampo.oninput = function() {
+                verificaInstantanea(this);
+            };
+        }
     }    
+
+    // Atualiza o texto do placar no topo com os pontos carregados do armazenamento local
+    atualizaPlacarTexto();
 
     function play(elem){
         var indice = elem.id.replace("a", "");
@@ -79,12 +95,31 @@ window.onload = function() {
             var controle = document.getElementById("controle") || document.getElementById("som");
             if (controle) controle.pause();
 
+            // GRAVAÇÃO LOCAL: Salva o acerto no navegador
+            progressoSalvo[indice] = resposta;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(progressoSalvo));
+
             atualizaPonto();
         }
     }
 
-    function atualizaPonto(){
+    function atualizaPonto() {
         pontos = pontos + 1;
+        atualizaPlacarTexto();
+
+        // VERIFICAÇÃO DE VITÓRIA: Abre o modal ao zerar
+        if (pontos === path.length) {
+            setTimeout(function() {
+                var finalScore = document.getElementById("score-final");
+                if (finalScore) finalScore.innerHTML = pontos + " / " + path.length;
+
+                var modal = document.getElementById("modal-parabens");
+                if (modal) modal.classList.add("mostrar");
+            }, 600); 
+        }
+    }
+
+    function atualizaPlacarTexto() {
         var placar = document.getElementById("pontos") || document.getElementById("pontuacao");
         if(placar) {
             if(pontos < 10){

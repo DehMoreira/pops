@@ -134,15 +134,28 @@ window.onload = function() {
         }
     }
 
-    function atualizaPonto() {
-        pontos = pontos + 1;
-        var placar = document.getElementById("pontos");
-        if (placar) {
-            if (pontos < 10) {
-                placar.innerHTML = "0" + pontos + " / " + path.length;  
-            } else {
-                placar.innerHTML = pontos + " / " + path.length;             
-            }
+function atualizaPonto() {
+    pontos = pontos + 1;
+    var placar = document.getElementById("pontos");
+    if (placar) {
+        if (pontos < 10) {
+            placar.innerHTML = "0" + pontos + " / " + path.length;  
+        } else {
+            placar.innerHTML = pontos + " / " + path.length;             
         }
     }
+
+    // VERIFICAÇÃO DE VITÓRIA: Se acertou a última que faltava
+    if (pontos === path.length) {
+        setTimeout(function() {
+            // Atualiza o número dentro da janelinha de parabéns
+            var finalScore = document.getElementById("score-final");
+            if (finalScore) finalScore.innerHTML = pontos + " / " + path.length;
+
+            // Faz a tela de vitória surgir com elegância
+            var modal = document.getElementById("modal-parabens");
+            if (modal) modal.classList.add("mostrar");
+        }, 600); // Dá um pequeno delay de meio segundo para o card ficar verde antes da tela subir
+    }
+}
 };

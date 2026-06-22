@@ -49,7 +49,10 @@ window.onload = function() {
 
     var pontos = 0;
 
-    // Busca a div 'players' no HTML
+    // Identificador único para a memória desta categoria
+    var STORAGE_KEY = "game_pops_desenhos";
+
+    // Busca ou cria a div 'players' no HTML
     var container = document.getElementById("players");
     if (!container) {
         container = document.createElement("div");
@@ -57,11 +60,10 @@ window.onload = function() {
         document.body.appendChild(container);
     }
 
-    // Configuração inicial do placar
-    var placar = document.getElementById("pontos");
-    if (placar) placar.innerHTML = "00 / " + path.length; 
+    // Carrega o histórico salvo (se existir) ou cria um objeto de progresso vazio
+    var progressoSalvo = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
-    // Loop que gera a grade de botões e inputs na tela
+    // Loop que gera a grade de botões e inputs na tela carregando a memória
     for (var i = 0; i < path.length; i++) {
         var ins = document.createElement("div");
         ins.id = 'b' + i;
@@ -75,16 +77,27 @@ window.onload = function() {
         
         container.appendChild(ins);
 
-        // Clique para tocar a música
-        document.getElementById('a' + i).onclick = function() {
-            play(this);
-        };
+        var inputCampo = document.getElementById('palpite' + i);
 
-        // Verificação em tempo real (conforme o usuário digita cada letra)
-        document.getElementById('palpite' + i).oninput = function() {
-            verificaInstantanea(this);
-        };
+        // CHECAGEM DE MEMÓRIA: Restaura o card caso ele já tenha sido acertado antes
+        if (progressoSalvo[i]) {
+            ins.classList.add("acertou");
+            inputCampo.disabled = true;
+            inputCampo.value = progressoSalvo[i].toUpperCase();
+            pontos++; // Soma o ponto silenciosamente no carregamento
+        } else {
+            // Se não foi acertado ainda, define os eventos normais de jogo
+            document.getElementById('a' + i).onclick = function() {
+                play(this);
+            };
+            inputCampo.oninput = function() {
+                verificaInstantanea(this);
+            };
+        }
     }    
+
+    // Atualiza o texto do placar no topo com os pontos carregados do banco local
+    atualizaPlacarTexto();
 
     function play(elem) {
         var indice = elem.id.replace("a", "");
@@ -105,7 +118,7 @@ window.onload = function() {
         var palpite = elem.value;
         if (!palpite.trim()) return; 
 
-        // Padroniza e limpa a resposta do jogador (minúsculo, sem acentos, remove espaços extras)
+        // Padroniza e limpa a resposta do jogador
         var palpiteLimpo = palpite.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").trim();
 
         var resposta = respostaOriginal;
@@ -125,24 +138,45 @@ window.onload = function() {
         var respostaLimpa = resposta.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").trim();
         var auxRespostaLimpa = auxResposta.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").trim();
 
-        // Se bater com qualquer uma das opções válidas, valida o acerto
+        // Se bater com qualquer uma das opções válidas, valida o acerto e salva localmente
         if (palpiteLimpo === respostaLimpa || palpiteLimpo === auxRespostaLimpa) {
             var card = document.getElementById('b' + indice);
             card.classList.add("acertou");
             
             elem.disabled = true;
-            elem.value = resposta.toUpperCase(); // Trava o nome limpo e oficial no card
+            elem.value = resposta.toUpperCase(); // Trava o nome oficial no card
             
             // Pausa a música ao acertar
             var controle = document.getElementById("controle") || document.getElementById("som");
             if (controle) controle.pause();
+
+            // GRAVAÇÃO LOCAL: Registra este acerto no armazenamento do navegador
+            progressoSalvo[indice] = resposta;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(progressoSalvo));
 
             atualizaPonto();
         }
     }
 
     function atualizaPonto() {
-        pontos = 10 ? pontos = pontos + 1 : pontos = pontos + 1; // Incrementa a pontuação
+        pontos = pontos + 1;
+        atualizaPlacarTexto();
+
+        // VERIFICAÇÃO DE VITÓRIA: Se acertou tudo, abre a janelinha modal
+        if (pontos === path.length) {
+            setTimeout(function() {
+                var finalScore = document.getElementById("score-final");
+                if (finalScore) finalScore.innerHTML = pontos + " / " + path.length;
+
+                var modal = document.getElementById("modal-parabens");
+                if (modal) modal.classList.add("mostrar");
+            }, 600); 
+        }
+    }
+
+    function updatePlacar() {}
+
+    function atualizaPlacarTexto() {
         var placar = document.getElementById("pontos");
         if (placar) {
             if (pontos < 10) {

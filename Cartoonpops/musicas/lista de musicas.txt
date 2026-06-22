@@ -1,4 +1,4 @@
-msc1 = as tartarugas ninjas
+msc1 = as tartarugas ninja
 msc2 = a turma do perere
 msc3 = manda chuva
 msc4 = os simpsons
