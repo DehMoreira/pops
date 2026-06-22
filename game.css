@@ -251,3 +251,28 @@ audio { display: none !important; }
     0% { transform: scale(0); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
 }
+
+/* AJUSTE PARA CELULARES (Layout de 1 ou 2 colunas) */
+@media (max-width: 600px) {
+    #players {
+        /* Muda de 7 colunas para 1 ou 2 colunas */
+        grid-template-columns: repeat(1, 1fr) !important; 
+        gap: 15px !important;
+        padding: 10px !important;
+    }
+
+    .song {
+        /* Aumenta o tamanho do card para ocupar bem a largura */
+        width: 90% !important; 
+        max-width: 350px !important;
+        height: auto !important; /* Deixa altura automática */
+        min-height: 120px !important;
+        padding: 20px !important;
+    }
+
+    .play {
+        /* Aumenta o botão de play para facilitar o clique com o dedo */
+        width: 60px !important;
+        height: 60px !important;
+    }
+}
